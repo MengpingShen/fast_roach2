@@ -1,0 +1,4 @@
+time heimdall -f /tmp/2018-01-31/B0_I_2018-01-31_14-07-02.fil -dm 100 1200 -v -nsamps_gulp 100000 -dm_tol 1.5
+
+dspsr -D 1100 -c 3.0 -T 3.0 -O dspsr_output /tmp/2018-01-31/B0_I_2018-01-31_14-07-02.fil
+pazi dspsr_output.ar

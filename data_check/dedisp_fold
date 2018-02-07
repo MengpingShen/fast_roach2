@@ -1,0 +1,12 @@
+#! /bin/bash
+
+#infile="B0_I_2018-01-23_11-30-12.fil"
+infile="$1"
+dm=1100
+period=3000
+
+dedisperse $infile -B 8 -d $dm > $infile.tim
+fold $infile.tim -p $period > $infile.sgl
+reader $infile.tim > $infile.ascii
+gnuplot -persist -e "plot '$infile.sgl' with lines"
+
