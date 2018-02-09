@@ -28,15 +28,15 @@
 	sudo  ifup -a
 	```
 ### Scripts and programs
-	* roach2_conf.py is used to load the boffile to roach2, setup ip address and configure parameters.
-	*  adapt_gain_conf.py is used to find a proper gain value for 8 bit output data. Set the gain value step by step to increase or decrease the value of output data. Once the average data falls into the preset range, the entire adaptive adjustment is completed. 
-	*  receive_packets.py is used to receive the packets from all four 10Gb ports and print the header information out.
-	*  netspeed.sh is used to test the network speed of a given IP adress. 
-	*  topology_pnn.sh is used to get the NUMA information for Hashpipe.
-	*  psrsoft_cmd has some command can be used for pulsar data processing which form different software such as sigproc,dspsr,presto,psrchieve,heimdall ...
-	*  heimdall_script is shell script run on computing node for filterbank file looking and heimdall launching.  
-	*  monitor_10gbe.py is used to monitor the output packets from 10GbE.Receiving the packets from 10GbE and print the head out and plot the spectrum data out.
-	* waterfall_plot3D.py is used for 3 dimensions waterfall figure plot out. Receiving a given number of spectrums from 10GbE and plot in frequency, time and power.	
+* roach2_conf.py is used to load the boffile to roach2, setup ip address and configure parameters.
+*  adapt_gain_conf.py is used to find a proper gain value for 8 bit output data. Set the gain value step by step to increase or decrease the value of output data. Once the average data falls into the preset range, the entire adaptive adjustment is completed. 
+*  receive_packets.py is used to receive the packets from all four 10Gb ports and print the header information out.
+*  netspeed.sh is used to test the network speed of a given IP adress. 
+*  topology_pnn.sh is used to get the NUMA information for Hashpipe.
+*  psrsoft_cmd has some command can be used for pulsar data processing which form different software such as sigproc,dspsr,presto,psrchieve,heimdall ...
+*  heimdall_script is shell script run on computing node for filterbank file looking and heimdall launching.  
+*  monitor_10gbe.py is used to monitor the output packets from 10GbE.Receiving the packets from 10GbE and print the head out and plot the spectrum data out.
+* waterfall_plot3D.py is used for 3 dimensions waterfall figure plot out. Receiving a given number of spectrums from 10GbE and plot in frequency, time and power.	
 ### Single beam test
 * Generate a fake periodic pulsar signal from a sweep generator,merge the signal to a noise and inject to both polarizations.
 	* sweep frequency: 500MHz to 100MHz
@@ -50,12 +50,12 @@
 * 3D waterfall plot from 10Gb port is shown in Fig.2
 ![3D waterfall plot from 10Gb](waterfall_3D.png)
 > Fig. 2 3D waterfall plot from 10Gb
-* Waterfall pictures before and after dedispersion by DSPSR of filterbank file are shown in Fig.3 and Fig.4
+* Waterfall pictures before and after dedispersion by DSPSR for filterbank file are shown in Fig.3 and Fig.4
 * ![Waterfall before dedispersion](waterfall_before_dedisp.png)
 > Fig. 3 Waterfall before dedispersion
 > ![Waterfall after dedispersion](waterfall_after_dedisp.png)
 > Fig. 4 Waterfall after dedispersion
-* Time domain plots before and after dedispersion by DSPSR of filterbank file are shown in Fig.5 and Fig.6
+* Time domain plots before and after dedispersion by DSPSR for filterbank file are shown in Fig.5 and Fig.6
 * ![time domain before dedispersion](time_domain_before_dedisp.png)
 > Fig. 5 time domain before dedispersion
 > ![time domain after dedispersion](time_domain_after_dedisp.png)
