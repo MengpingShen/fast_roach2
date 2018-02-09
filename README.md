@@ -45,13 +45,13 @@
 	* attenuation of noise source: 20dB	 
 	* DM = (t2-t1)/(4.15ms)[(ν1/GHz)<sup>-2</sup>-(ν2/GHz)<sup>-2</sup>]<sup>-1</sup>=1500/4.15/(1/1.4<sup>2</sup>-1/1.8<sup>2</sup>)=1793
 * The spectrum plots of both polarizations are shown in Fig.1
-![spectrum of both pols](spectrum_2pols.png | width=250)
+![spectrum of both pols](spectrum_2pols.png =250x10)
 > Fig. 1 spectrum of both pols
 * 3D waterfall plot from 10Gb port is shown in Fig.2
 ![3D waterfall plot from 10Gb](waterfall_3D.png)
 > Fig. 2 3D waterfall plot from 10Gb
 * Waterfall pictures before and after dedispersion by DSPSR for filterbank file are shown in Fig.3 and Fig.4
-* ![Waterfall before dedispersion](waterfall_before_dedisp.png | width=100)
+* ![Waterfall before dedispersion](waterfall_before_dedisp.png =100x)
 > Fig. 3 Waterfall before dedispersion
 > ![Waterfall after dedispersion](waterfall_after_dedisp.png)
 > Fig. 4 Waterfall after dedispersion
