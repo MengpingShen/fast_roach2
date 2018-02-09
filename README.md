@@ -45,13 +45,13 @@
 	* attenuation of noise source: 20dB	 
 	* DM = (t2-t1)/(4.15ms)[(ν1/GHz)<sup>-2</sup>-(ν2/GHz)<sup>-2</sup>]<sup>-1</sup>=1500/4.15/(1/1.4<sup>2</sup>-1/1.8<sup>2</sup>)=1793
 * The spectrum plots of both polarizations are shown in Fig.1
-![spectrum of both pols](spectrum_2pols.png)
+![spectrum of both pols](spectrum_2pols.png=250x100)
 > Fig. 1 spectrum of both pols
 * 3D waterfall plot from 10Gb port is shown in Fig.2
 ![3D waterfall plot from 10Gb](waterfall_3D.png)
 > Fig. 2 3D waterfall plot from 10Gb
 * Waterfall pictures before and after dedispersion by DSPSR for filterbank file are shown in Fig.3 and Fig.4
-* ![Waterfall before dedispersion](waterfall_before_dedisp.png)
+* ![Waterfall before dedispersion](waterfall_before_dedisp.png=100x)
 > Fig. 3 Waterfall before dedispersion
 > ![Waterfall after dedispersion](waterfall_after_dedisp.png)
 > Fig. 4 Waterfall after dedispersion
@@ -60,3 +60,14 @@
 > Fig. 5 time domain before dedispersion
 > ![time domain after dedispersion](time_domain_after_dedisp.png)
 > Fig. 6 time domain after dedispersion
+### FRB search test
+Use heimdall to search filterbank file which sweep generator faked with following command:
+```javascript
+time heimdall -f B0_I_2018-02-09_13-24-53.fil -dm 1000 2000 -nsamps_gulp 100000 -rfi_tol 50 -boxcar_max 16 -dm_tol 1.5 -v
+```
+What heimdall found in a cand file as follows:
+|SNR|Sample Index|Time offset|Filter index|DM index|DM|No. of associated detections|Sample index of earliest associated detection|Sample index of latest associated detection|
+|------|------|------|------|------|------|------|------|------|
+| 22.3886|	76716|	19.6393|	4|	410	|1729.42|	1440|	76636|	76836|	
+|12.9868|	77556|	19.8543|	4|	220	|1357.96|	243|	77540|	77604|	
+|22.164|	70668|	18.091|		4|	498	|1925.62|	1342|	70380|	70780|
