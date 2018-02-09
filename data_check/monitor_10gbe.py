@@ -34,7 +34,8 @@ def plot_spectrum():
 	else:
 		xx = N_Chans*[0]
 		yy = N_Chans*[0]
-	#print "header1 is %lu, header2 is %lu" % (header1,header2)
+	print "seq is %lu, ID source is %X" % (seq1,header1>>56)
+	#print "header1 is %lu, ID source is %X" % (header2,header2>>56)
 	#print "seq1 is %lu, seq2 is %lu" % (seq1,seq2)
 	freq = np.arange(0,N_Chans*Ch_BW,Ch_BW)
         plt.clf()
