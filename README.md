@@ -48,12 +48,12 @@
 ![spectrum of both pols](spectrum_2pols.png)
 > Fig. 1 spectrum of both pols
 * 3D waterfall plot from 10Gb port is shown in Fig.2
-![3D waterfall plot from 10Gb](waterfall_plot3D.png)
+![3D waterfall plot from 10Gb](waterfall_3D.png)
 > Fig. 2 3D waterfall plot from 10Gb
 * Waterfall pictures before and after dedispersion by DSPSR of filterbank file are shown in Fig.3 and Fig.4
-* ![Waterfall before dedispersion](spectrum_2pols.png)
+* ![Waterfall before dedispersion](waterfall_before_dedisp.png)
 > Fig. 3 Waterfall before dedispersion
-> ![Waterfall after dedispersion](waterfall_before_dedisp.png)
+> ![Waterfall after dedispersion](waterfall_after_dedisp.png)
 > Fig. 4 Waterfall after dedispersion
 * Time domain plots before and after dedispersion by DSPSR of filterbank file are shown in Fig.5 and Fig.6
 * ![time domain before dedispersion](time_domain_before_dedisp.png)
