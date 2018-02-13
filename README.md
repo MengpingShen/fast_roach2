@@ -38,7 +38,7 @@
 *  monitor_10gbe.py is used to monitor the output packets from 10GbE.Receiving the packets from 10GbE and print the head out and plot the spectrum data out.
 * waterfall_plot3D.py is used for 3 dimensions waterfall figure plot out. Receiving a given number of spectrums from 10GbE and plot in frequency, time and power.	
 ### Single beam test
-* Generate a fake periodic pulsar signal from a sweep generator,merge the signal to a noise and inject to both polarizations.
+* Generate a fake periodic pulsar signal from a sweep generator,merge the signal with a noise and inject to both polarizations.
 	* sweep frequency: 500MHz to 100MHz
 	* period: ~1.5 sec
 	* signal amplitude: -26dBm
@@ -72,3 +72,12 @@ What heimdall found in a cand file as follows:
 | 22.3886|	76716|	19.6393|	4|	410	|1729.42|	1440|	76636|	76836|	
 |12.9868|	77556|	19.8543|	4|	220	|1357.96|	243|	77540|	77604|	
 |22.164|	70668|	18.091|		4|	498	|1925.62|	1342|	70380|	70780|
+
+### Multi-beam test
+* Generate a faked pulsar signal and noise signal from sweep generator and noise source seperately, merge signal with noise to pol1 and only inject noise to pol2, the setting of the sweep generator is the same with single beam test.
+* In Hashpipe data recording, we can select which beam you want signal and which beam you wouldn't. For example, odd number of beams have signal  and even number of beams have the noise.
+* The waterfall pictures have processed by DSPSR of those beams with or without signal are shown in Fig. 7 and 8.
+> ![dispersion result of signal and noise](dspsr_with_signal.png)
+> Fig. 7 dispersion result of signal and noise
+> ![dispersion result of signal and noise](dspsr_without_signal.png)
+> Fig. 8 dispersion result ofnoise
