@@ -75,9 +75,9 @@ What heimdall found in a cand file as follows:
 
 ### Multi-beam test
 * Generate a faked pulsar signal and noise signal from sweep generator and noise source seperately, merge signal with noise to pol1 and only inject noise to pol2, the setting of the sweep generator is the same with single beam test.
-* In Hashpipe data recording, we can select which beam you want signal and which beam you wouldn't. For example, odd number of beams have signal  and even number of beams have the noise.
+* In Hashpipe data recording, we can select which beam you want signal injecting and which beam you wouldn't. For example, odd number of beams have signal  and even number of beams only have the noise.
 * The waterfall pictures have processed by DSPSR of those beams with or without signal are shown in Fig. 7 and 8.
 > ![dispersion result of signal and noise](dspsr_with_signal.png)
 > Fig. 7 dispersion result of signal and noise
 > ![dispersion result of signal and noise](dspsr_without_signal.png)
-> Fig. 8 dispersion result ofnoise
+> Fig. 8 dispersion result of without signal
