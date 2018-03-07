@@ -33,6 +33,7 @@ opts = attrdict(
 			fftshift = 2**32-1,
 			gain = 0x0200<<16 | 0x0200,
 			acclen = 32,
+			#acclen = 8,
 			bitsel = 2<<6 | 2<<4 | 2<<2 | 2,
 			)
 
@@ -215,6 +216,7 @@ if __name__ == '__main__':
 			print('done')
 
 		fpga.write_int('use_tvg', 0b00)
+		#fpga.write_int('use_tvg', 0b11)
 
 		print('Issue reset signal...'),
 		fpga.write_int('reset', 0b00)

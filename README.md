@@ -6,9 +6,10 @@
 	10Gb port: 192.168.1.127 # p2p1, FRB power term<br>
 	10Gb port: 192.168.2.127 # p2p2, FRB cross term<br>
   	10Gb port: 192.168.3.127 # p2p3, SETI pol 1 term<br>
-    10Gb port: 192.168.4.127 # p2p4, SETI pol 2 term<br>    
+    10Gb port: 192.168.4.127 # p2p4, SETI pol 2 term<br>   
+	* head node for testing(VM),ip address:10.32.127.17<br> 
 	* roach2<br>
-1Gb port: 10.128.2.8<br>
+1Gb port: 10.128.2.7<br>
 	10Gb port: 192.168.1.227 # FRB power term<br>
 	10Gb port: 192.168.2.227 # FRB cross term<br>
   	10Gb port: 192.168.3.227 # SETI pol 1 term<br>
