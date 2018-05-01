@@ -1,14 +1,13 @@
 #! /bin/bash
 # read config
-. /home/korpela/fast_frb.conf  # this will need to be moved elsewhere.
+. /home/peix/fast/fast_roach2/scripts/fast_frb.conf  # this will need to be moved elsewhere.
 
 mkdir -p $DONEDIR
 mkdir -p $LOCKFILE_DIR
 
 
 msleep() {
-#need to write an msleep program.  This will just sleep 0 seconds.
-  local len=`expr $1 / 1000`
+  local len=`echo $1 / 1000 | bc -l`
   sleep $len
 }
 
@@ -63,11 +62,13 @@ do_heimdall() {
   local file
   cd $1 # change to run director
   file=$2
-#  time heimdall -gpu_id 0  -f $file  -dm 0 5000 -nsamps_gulp 1000000 -rfi_tol 10 -dm_tol 1.75 -rfi_no_narrow -rfi_no_broad -v
-
-  time heimdall -f $file -rfi_tol 20 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -nsamps_gulp 100000  -v
   #heimdall command here 
-  /bin/cp *.cand $CANDDIR
+  #{ time numactl --physcpubind=$cpu --membind=0 heimdall -gpu_id 0 -f $file -rfi_tol 20 -dm_tol 1.75 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -nsamps_gulp 100000  -v; } |& tee -a /home/peix/fast/fast_roach2/scripts/heimdall-time.log
+  #{ time numactl --physcpubind=$cpu --membind=0 heimdall -gpu_id 0 -f $file -rfi_tol 20 -dm_tol 1.75 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -v; } |& tee -a /home/peix/fast/fast_roach2/scripts/heimdall-time.log
+  { time numactl --physcpubind=$cpu --membind=0 heimdall -gpu_id 0 -f $file -rfi_tol 20 -dm_tol 1.25 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -v; } |& tee -a /home/peix/fast/fast_roach2/scripts/heimdall-time.log
+
+# no longer necessary
+#  /bin/cp *.cand $CANDDIR
   cd $DATADIR
 }
 
@@ -88,7 +89,12 @@ wait_for_fil_file() {
     file=`/bin/ls -1 ${DATADIR}/*.fil ${DATADIR}/*.FIL 2>/dev/null | head -1`
     n=`/bin/ls -l ${DATADIR}/*.LOCK 2>/dev/null | wc -l`
     if [ $n -le $MAX_HEIMDALL_PROCESSES ] ; then
-      if test x$file != x && test -f $file  ; then  # start of subprocess
+      if [ $cpu -eq 14 ] ; then
+        cpu=16
+      else
+        cpu=14
+      fi
+      if test x$file != x && test -f $file  ; then #start of subprocess
         if get_lockfile $file.LOCK ; then
           mkdir -p ${RUN_DIR}.$BASHPID
           mv $file ${RUN_DIR}.$BASHPID
@@ -96,16 +102,18 @@ wait_for_fil_file() {
           mv $RUN_DIR.$BASHPID $DONEDIR
           free_lockfile $file.LOCK
         fi
-      fi  &  # end of subprocess
-      wait
-    fi 
+      fi & #end of subprocess
+    fi
+    msleep 1000 
     file=`/bin/ls -1 ${DATADIR}/*.fil ${DATADIR}/*.FIL 2>/dev/null | head -1`
     if [ x${file} = x ] ; then
       done=1
+      wait
     fi
   done
 }
 
+cpu=16
 while /bin/true ; do
   wait_for_fil_file
   msleep 100

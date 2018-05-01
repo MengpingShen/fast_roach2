@@ -16,7 +16,7 @@ PORT = 12345
 
 N_FREQ = 4096
 thres_low = 10 # low threshold  
-thres_high = 30 # high threshold
+thres_high = 20 # high threshold
 gain_step = 0x0100 # step gain
 
 if __name__ == '__main__':

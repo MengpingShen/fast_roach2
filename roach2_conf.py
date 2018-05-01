@@ -28,12 +28,13 @@ class attrdict(dict):
 		self.__dict__ = self
 
 # integration time 4096*2*acclen/1024M = 8192*32/1024M = 256 us
+# acclen start from 0, if acclen=7, use 8 to calculate
 opts = attrdict(
 			nbins = 4 * 2**10,
 			fftshift = 2**32-1,
 			gain = 0x0200<<16 | 0x0200,
-			acclen = 32,
-			#acclen = 8,
+			#acclen = 31,
+			acclen = 7,
 			bitsel = 2<<6 | 2<<4 | 2<<2 | 2,
 			)
 

@@ -46,7 +46,7 @@ if [ $do_net == 1 -o $do_all == 1 ]
 then
   echo $sep
   echo Ethernet interfaces to CPUs:
-  for i in /sys/class/net/enp*
+  for i in /sys/class/net/eth*
   do
     echo -n "$(basename $i): "
     cat $i/device/local_cpulist

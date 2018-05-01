@@ -1,0 +1,92 @@
+processing beam 1
+Process 0 using GPU 0
+Using Thrust v1.6.0
+Beginning data processing, requesting 262144 samples
+Executing pipeline on new gulp of 76800 samples...
+Mem alloc time:          0.157981
+0-DM cleaning time:      1.13793
+Dedispersion time:       0.339401
+Copy time:               0.039927
+Baselining time:         0.13251
+Normalisation time:      0.124466
+Filtering time:          0.386659
+Find giants time:        0.0857607
+Process candidates time: 0.001559
+Total time:              2.33402
+Processed 59180 samples.
+Successfully processed a total of 59180 samples.
+Shutting down...
+All done.
+
+real	0m3.228s
+user	0m2.168s
+sys	0m0.912s
+processing beam 1
+Process 0 using GPU 0
+Using Thrust v1.6.0
+Beginning data processing, requesting 262144 samples
+Executing pipeline on new gulp of 76800 samples...
+Mem alloc time:          0.159654
+0-DM cleaning time:      1.14663
+Dedispersion time:       0.341129
+Copy time:               0.0399099
+Baselining time:         0.133341
+Normalisation time:      0.124369
+Filtering time:          0.387897
+Find giants time:        0.0872307
+Process candidates time: 0.001534
+Total time:              2.3481
+Processed 59180 samples.
+Successfully processed a total of 59180 samples.
+Shutting down...
+All done.
+
+real	0m3.078s
+user	0m2.212s
+sys	0m0.856s
+processing beam 1
+Process 0 using GPU 0
+Using Thrust v1.6.0
+Beginning data processing, requesting 262144 samples
+Executing pipeline on new gulp of 76800 samples...
+Mem alloc time:          0.159187
+0-DM cleaning time:      1.14258
+Dedispersion time:       0.335816
+Copy time:               0.039733
+Baselining time:         0.133032
+Normalisation time:      0.123082
+Filtering time:          0.383025
+Find giants time:        0.0858287
+Process candidates time: 0.001517
+Total time:              2.33067
+Processed 59180 samples.
+Successfully processed a total of 59180 samples.
+Shutting down...
+All done.
+
+real	0m3.066s
+user	0m2.116s
+sys	0m0.944s
+processing beam 1
+Process 0 using GPU 0
+Using Thrust v1.6.0
+Beginning data processing, requesting 262144 samples
+Executing pipeline on new gulp of 229376 samples...
+Mem alloc time:          0.554937
+0-DM cleaning time:      3.32975
+Dedispersion time:       1.23726
+Copy time:               0.107598
+Baselining time:         0.151929
+Normalisation time:      0.134282
+Filtering time:          0.412935
+Find giants time:        0.0987539
+Process candidates time: 0.001757
+Total time:              5.80695
+Processed 211756 samples.
+Successfully processed a total of 211756 samples.
+Shutting down...
+All done.
+
+real	0m6.743s
+user	0m5.092s
+sys	0m1.636s

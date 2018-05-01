@@ -1,0 +1,24 @@
+#! /bin/bash
+. /home/korpela/fast_frb.conf
+cd $DONEDIR
+while /bin/true ; do
+  for dir in run.* ; do
+    if [ $dir != 'run.*' ] ; then
+      if [ ! -f $dir/.moved ] ; then
+        mkdir -p $dest
+        for file in $dir/*.cand ; do
+          f=`basename $file`
+          time_str=`echo $f | awk -F_ '{print $1}' | awk -F- '{printf("%0.4d-%0.2d-%0.2d %s\n",$1,$2,$3,$4)}'`
+          time=`date --date="${time_str}" +%s`
+          d=`expr $time - \( $time % $cand_dwell \)`
+          dest=${CANDDIR}/${d}
+          mkdir -p $dest
+          /bin/cp $file ${dest}/`basename $file`
+        done
+        touch ${dir}/.moved
+      fi
+    fi
+  done
+  sleep 1
+done
+exit 0
