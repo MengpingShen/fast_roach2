@@ -1,0 +1,38 @@
+#!/bin/bash
+
+session_name="mb"
+
+function mb-start() {
+	tmux new-session -s $session_name -n $session_name -d
+	tmux split-window -v -l 65
+	tmux split-window -v -l 54
+	tmux split-window -v -l 43
+	tmux split-window -v -l 32
+	tmux split-window -v -l 21
+	tmux split-window -v -l 10
+	tmux split-window -h -p 66 -t 0
+	tmux split-window -h -p 66 -t 1
+	tmux split-window -h -p 66 -t 2
+	tmux split-window -h -p 66 -t 3
+	tmux split-window -h -p 66 -t 4
+	tmux split-window -h -p 66 -t 5
+	tmux split-window -h -p 66 -t 6
+	tmux split-window -h -p 50 -t 7
+	tmux split-window -h -p 50 -t 8
+	tmux split-window -h -p 50 -t 9
+	tmux split-window -h -p 50 -t 10
+	tmux split-window -h -p 50 -t 11
+	tmux split-window -h -p 50 -t 12
+	tmux split-window -h -p 50 -t 13
+	tmux -2 attach-session -t mb
+}
+
+function mb-stop() {
+	tmux kill-session -t $session_name
+}
+
+function mb-run() {
+	for i in $(seq 0 2); do
+		tmux send-key -t $i "ls -l" Enter
+	done
+}

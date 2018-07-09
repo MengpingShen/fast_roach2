@@ -28,13 +28,11 @@ class attrdict(dict):
 		self.__dict__ = self
 
 # integration time 4096*2*acclen/1024M = 8192*32/1024M = 256 us
-# acclen start from 0, if acclen=7, use 8 to calculate
 opts = attrdict(
 			nbins = 4 * 2**10,
 			fftshift = 2**32-1,
 			gain = 0x0200<<16 | 0x0200,
-			#acclen = 31,
-			acclen = 7,
+			acclen = 32,
 			bitsel = 2<<6 | 2<<4 | 2<<2 | 2,
 			)
 
@@ -217,7 +215,6 @@ if __name__ == '__main__':
 			print('done')
 
 		fpga.write_int('use_tvg', 0b00)
-		#fpga.write_int('use_tvg', 0b11)
 
 		print('Issue reset signal...'),
 		fpga.write_int('reset', 0b00)

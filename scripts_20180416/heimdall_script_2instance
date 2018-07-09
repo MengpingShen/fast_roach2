@@ -1,0 +1,117 @@
+#! /bin/bash
+# read config
+#. /home/korpela/fast_frb.conf  # this will need to be moved elsewhere.
+. /home/peix/fast/fast_roach2/scripts/fast_frb.conf  # this will need to be moved elsewhere.
+
+mkdir -p $DONEDIR
+mkdir -p $LOCKFILE_DIR
+
+
+msleep() {
+#need to write an msleep program.  This will just sleep 0 seconds.
+  local len=`expr $1 / 1000`
+  sleep $len
+}
+
+get_lockfile() {
+  local pid
+  local lockfile
+  local i
+  local rv
+  lockfile=$1
+  pid=0
+  i=0
+  rv=0
+  while [ ${pid} -ne $BASHPID ] ; do
+    while [ ! -f ${lockfile} ] ; do
+      echo $BASHPID > ${lockfile} 
+    done
+    msleep 1
+    pid=`cat ${lockfile}`
+    if [ ${pid} -ne $BASHPID ] ; then
+      msleep 100
+      i=`expr $i + 1`
+      if [ $i -ge $LOCKFILE_MAX_TRIES ] ; then
+        rv=1
+        break
+      fi
+    fi
+  done 
+  return $rv
+}    
+
+free_lockfile() {
+  local pid
+  local fpid
+  local lockfile
+  local rv
+  rv=1
+  lockfile=$1
+  pid=`cat ${lockfile}`
+  if [ x$2 != x ] ; then
+    fpid=$2
+  else 
+    fpid=$BASHPID
+  fi
+  if [ $fpid -eq $pid ] ; then
+    /bin/rm $lockfile
+    rv=0
+  fi
+  return $rv
+}
+
+do_heimdall() {
+  local file
+  cd $1 # change to run director
+  file=$2
+  #time heimdall -gpu_id 0  -f $file  -dm 0 5000 -nsamps_gulp 1000000 -rfi_tol 10 -dm_tol 1.75 -rfi_no_narrow -rfi_no_broad -v 
+  #{ time taskset 0x00008000 heimdall -gpu_id 0 -f $file -rfi_tol 20 -dm_tol 1.75 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -nsamps_gulp 1000000  -v; } |& tee -a /home/peix/fast/fast_roach2/scripts/heimdall-time.log
+  #{ time numactl --physcpubind=17 --membind=1 heimdall -gpu_id 1 -f $file -rfi_tol 20 -dm_tol 1.75 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -nsamps_gulp 1000000  -v; } |& tee -a /home/peix/fast/fast_roach2/scripts/heimdall-time.log
+  { time numactl --physcpubind=15 --membind=1 heimdall -gpu_id 1 -f $file -rfi_tol 20 -dm_tol 1.75 -dm_nbits 32 -dm 1 2000 -boxcar_max 16  -nsamps_gulp 1000000  -v; } |& tee -a /home/peix/fast/fast_roach2/scripts/heimdall-time.log
+  #heimdall command here 
+  /bin/cp *.cand $CANDDIR
+  cd $DATADIR
+}
+
+do_alarm() {
+  if /bin/true ; then
+   sleep $1
+   kill $2
+  fi &
+}
+
+wait_for_fil_file() {
+  local done
+  local file
+  local n
+  done=0
+#  wait
+  while [ $done -eq 0 ] ; do
+    file=`/bin/ls -1 ${DATADIR}/*.fil ${DATADIR}/*.FIL 2>/dev/null | head -1`
+    n=`/bin/ls -l ${DATADIR}/*.LOCK 2>/dev/null | wc -l`
+    if [ $n -le $MAX_HEIMDALL_PROCESSES ] ; then
+      if test x$file != x && test -f $file  ; then  # start of subprocess
+        if get_lockfile $file.LOCK ; then
+          mkdir -p ${RUN_DIR}.$BASHPID
+          mv $file ${RUN_DIR}.$BASHPID
+          do_heimdall $RUN_DIR.$BASHPID `basename $file`
+          #mv $RUN_DIR.$BASHPID $DONEDIR
+	  # For testing deleting run directory
+	  rm -rf $RUN_DIR.$BASHPID
+          free_lockfile $file.LOCK
+        fi
+      fi  &  # end of subprocess
+      wait
+    fi 
+    file=`/bin/ls -1 ${DATADIR}/*.fil ${DATADIR}/*.FIL 2>/dev/null | head -1`
+    if [ x${file} = x ] ; then
+      done=1
+    fi
+  done
+}
+
+while /bin/true ; do
+  wait_for_fil_file
+  msleep 100
+done
+

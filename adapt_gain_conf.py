@@ -8,15 +8,17 @@ import time,struct, socket
 from corr import katcp_wrapper, log_handlers
 import numpy as np
 
-roach2 = 'r2d021403.s6.pvt' # (10.0.1.169) mounted on asa2
+#roach2 = 'r2d021403.s6.pvt' # (10.0.1.169) mounted on asa2
+roach2 = '10.128.2.7' # for China machine
 katcp_port = 7147
 
-IP1 = "10.10.12.2" #bind on IP addresses
+#IP1 = "10.10.12.2" #bind on IP addresses
+IP1 = "192.168.1.127" #for China GPU server
 PORT = 12345
 
 N_FREQ = 4096
 thres_low = 10 # low threshold  
-thres_high = 20 # high threshold
+thres_high = 30 # high threshold
 gain_step = 0x0100 # step gain
 
 if __name__ == '__main__':

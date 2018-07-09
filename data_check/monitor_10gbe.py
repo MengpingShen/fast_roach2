@@ -77,8 +77,9 @@ if __name__ == '__main__':
 	yy_tmp1=2048*[0]
 	xx_tmp2=2048*[0]
 	yy_tmp2=2048*[0]
-       	#IP1 = "10.10.10.2" #bind on IP addresses
-       	IP1 = "10.10.12.2" #bind on IP addresses
+       	IP1 = "192.168.16.11" #bind on IP addresses
+       	#IP1 = "192.168.1.127" #bind on IP addresses
+       	#IP1 = "10.10.12.2" #bind on IP addresses
        	PORT = 12345
 	file_name = "fast-test.dat"
        	sock1 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

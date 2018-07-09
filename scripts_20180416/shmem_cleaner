@@ -1,0 +1,23 @@
+#! /bin/sh
+. /home/korpela/fast_frb.conf
+cd $DATADIR
+while /bin/true ; do
+  for file in `find . -type f` ; do
+    mtime=`date --reference="${file}" +%s`
+    time=`date +%s`
+    if [ `expr $time - $mtime` -ge $MAX_FILE_AGE ] ; then
+      /bin/rm -f $file
+    fi
+  done
+  for file in `find . -type d` ; do
+    mtime=`date --reference="${file}" +%s`
+    time=`date +%s`
+    nfiles=`ls $file | wc -l`
+    if [ $nfiles -eq 0 ] ; then
+      if [ `expr $time - $mtime` -ge $MAX_FILE_AGE ] ; then
+        /bin/rmdir $file
+      fi
+    fi
+  done
+  sleep `expr $MAX_FILE_AGE / 10`
+done
