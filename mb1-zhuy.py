@@ -13,8 +13,8 @@ bitstream = 'mb4k-v146.bof.gz'
 #bitstream = 'mb4k_2017_Oct_06_2340.bof.gz'
 #bitstream = 'mb1k_2017_Aug_25_1643.bof.gz'
 
-roach = '10.128.2.7'
-#roach = 'r1807'
+#roach = '11.128.2.7'
+roach = 'r1807'
 katcp_port = 7147
 
 spec_scope_names = ('AA', 'BB', 'CR', 'CI')
@@ -28,8 +28,10 @@ class attrdict(dict):
 opts = attrdict(
 			nbins = 4 * 2**10,
 			fftshift = 2**32-1,
-			gain = 0x0100<<16 | 0x0100,
-			acclen = 8,
+			#gain = 0x0100<<16 | 0x0100,
+			gain = 0x0200<<16 | 0x0200,
+			acclen = 7,
+			#acclen = 32,
 			bitsel = 2<<6 | 2<<4 | 2<<2 | 2,
 			)
 
@@ -57,6 +59,8 @@ def exit_clean():
 
 
 def init_10gbe(dev, ip, port, dest_ip, dest_port):
+	#mip = '192.168.3.227'
+	#ip_addr, = struct.unpack('!L',socket.inet_aton(mip))
 	ip_addr, = struct.unpack('!L',socket.inet_aton(ip))
 	mac_addr = mac_base + ip_addr
 	devname = dev + '_core'
@@ -201,10 +205,14 @@ if __name__ == '__main__':
 
 		fpga.write_int('use_tvg', 0b11)
 
-		init_10gbe('xgbe0', '192.168.1.227', 33333, '192.168.1.127', 12345)
-		init_10gbe('xgbe1', '192.168.2.227', 33333, '192.168.2.127', 12345)
-		init_10gbe('xgbe2', '192.168.3.227', 33333, '192.168.3.127', 12345)
-		init_10gbe('xgbe3', '192.168.4.227', 33333, '192.168.4.127', 12345)
+		#init_10gbe('xgbe0', '192.168.1.227', 33333, '192.168.1.127', 12345)
+		#init_10gbe('xgbe1', '192.168.2.227', 33333, '192.168.2.127', 12345)
+		#init_10gbe('xgbe2', '192.168.3.227', 33333, '192.168.3.127', 12345)
+		#init_10gbe('xgbe3', '192.168.4.227', 33333, '192.168.4.127', 12345)
+		init_10gbe('xgbe0', '192.168.1.227', 33333, '239.1.0.1', 12345)
+		init_10gbe('xgbe1', '192.168.2.227', 33333, '239.1.0.2', 12345)
+		init_10gbe('xgbe2', '192.168.3.227', 33333, '239.1.0.3', 12346)
+		init_10gbe('xgbe3', '192.168.4.227', 33333, '239.1.0.4', 12346)
 
 		init_10gbe('xgbe4', '192.168.5.227', 33333, '192.168.5.127', 12345)
 		init_10gbe('xgbe5', '192.168.5.227', 33334, '192.168.5.127', 12346)
